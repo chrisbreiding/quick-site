@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upcoming Week</title>
+
+  <style>
+    body {
+      align-items: center;
+      display: flex;
+      font-family: sans-serif;
+      justify-content: center;
+    }
+
+    button {
+      background: #fff;
+      border: solid 1px #333;
+      border-radius: 5px;
+      color: #333;
+      cursor: pointer;
+      font-size: 20px;
+      padding: 5px 10px;
+    }
+
+    button:hover {
+      background: #e3e3e3;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <button class="add">Add Following Week</button>
+  <p class="running hide">Adding following week...</p>
+  <div class="success hide">
+    <p>Successfully added following week</p>
+    <p><button class="okay">Okay</button></p>
+  </div>
+  <div class="error hide">
+    <p>Error adding following week</p>
+    <p><button class="okay">Okay</button></p>
+  </div>
+
+  <script>
+    const addButton = document.querySelector('.add')
+    const running = document.querySelector('.running')
+    const success = document.querySelector('.success')
+    const error = document.querySelector('.error')
+
+    const show = (el) => {
+      el.classList.remove('hide')
+    }
+    const hide = (el) => {
+      el.classList.add('hide')
+    }
+
+    addButton.addEventListener('click', () => {
+      hide(addButton)
+      show(running)
+
+      setTimeout(() => {
+        hide(running)
+        show(success)
+      }, 2000)
+    })
+    Array.from(document.querySelectorAll('.okay')).forEach((okayButton) => {
+      okayButton.addEventListener('click', () => {
+        hide(okayButton.parentElement.parentElement)
+        show(addButton)
+      })
+    })
+  </script>
+</body>
+</html>
